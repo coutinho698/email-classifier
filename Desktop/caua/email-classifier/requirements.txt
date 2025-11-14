@@ -1,0 +1,6 @@
+flask
+transformers
+torch
+werkzeug
+pypdf2
+gunicorn
