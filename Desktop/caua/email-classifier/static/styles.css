@@ -8,114 +8,167 @@
 body {
   margin: 0;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  background: #f1f5f9;
+  background: radial-gradient(circle at top left, #e0f2fe 0, #f8fafc 40%, #e2e8f0 100%);
   color: #0f172a;
 }
 
-/* ========== LAYOUT CENTRAL ========== */
+/* ========== LAYOUT ========== */
 .wrapper {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding: 32px 16px;
 }
 
 .card {
   width: 100%;
-  max-width: 1080px;
+  max-width: 1120px;
   background: #ffffff;
-  border-radius: 18px;
-  padding: 32px;
+  border-radius: 20px;
+  padding: 28px 32px 24px;
   box-shadow:
-    0 8px 20px rgba(15, 23, 42, 0.08),
-    0 20px 60px rgba(15, 23, 42, 0.05);
+    0 18px 40px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(148, 163, 184, 0.25);
   display: grid;
-  grid-template-columns: 1.7fr 1fr;
+  grid-template-columns: 1.6fr 1.2fr;
   gap: 32px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 920px) {
   .card {
     grid-template-columns: 1fr;
+    padding: 24px 20px 20px;
   }
 }
 
 /* ========== CABEÇALHO ========== */
 .header {
   grid-column: 1 / -1;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .title {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #0f172a;
 }
 
 .subtitle {
   font-size: 0.95rem;
-  color: #475569;
+  color: #64748b;
   margin-top: 4px;
 }
 
-/* ========== FORMULÁRIO ========== */
+/* ========== COLUNAS ========== */
+.left-side,
+.right-side {
+  align-self: flex-start;
+}
+
+/* ========== TEXTOS E SEÇÕES ========== */
 .section-title {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  color: #0f172a;
 }
 
 .section-help {
   font-size: 0.85rem;
   color: #64748b;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
+}
+
+/* ========== FORMULÁRIO ========== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #0f172a;
 }
 
 textarea {
   width: 100%;
-  min-height: 200px;
-  border-radius: 12px;
+  min-height: 210px;
+  border-radius: 14px;
   border: 1px solid #cbd5e1;
-  padding: 12px;
+  padding: 12px 14px;
   resize: vertical;
   font-size: 0.94rem;
   font-family: inherit;
-  transition: 0.15s ease;
+  transition: 0.16s ease;
+  background: #f8fafc;
+}
+
+textarea::placeholder {
+  color: #94a3b8;
 }
 
 textarea:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 3px #93c5fd60;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
   outline: none;
 }
 
-/* ========== BOTÃO ========== */
-button {
-  margin-top: 12px;
-  padding: 12px 22px;
+/* Botão principal */
+.primary-button {
+  margin-top: 10px;
+  padding: 11px 20px;
   font-size: 0.95rem;
   font-weight: 600;
-  background: #2563eb;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: #ffffff;
   border: none;
   cursor: pointer;
-  border-radius: 12px;
-  transition: 0.2s ease;
-  box-shadow: 0 6px 16px #2563eb40;
+  border-radius: 999px;
+  transition: 0.18s ease;
+  align-self: flex-start;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
 }
 
-button:hover {
-  background: #1e40af;
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.50);
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
 }
 
-/* ========== RESULTADOS (COLUNA DIREITA) ========== */
+/* Caixa de dica */
+.helper-box {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.helper-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.helper-text {
+  font-size: 0.8rem;
+  color: #475569;
+  margin-top: 4px;
+}
+
+/* ========== BADGES (resultado) ========== */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
+  padding: 7px 13px;
   border-radius: 999px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   margin-bottom: 14px;
 }
 
@@ -125,6 +178,11 @@ button:hover {
   border-radius: 999px;
 }
 
+.badge-text {
+  white-space: nowrap;
+}
+
+/* Produtivo */
 .badge.produtivo {
   background: #dcfce7;
   color: #166534;
@@ -133,6 +191,7 @@ button:hover {
   background: #16a34a;
 }
 
+/* Improdutivo */
 .badge.improdutivo {
   background: #fee2e2;
   color: #b91c1c;
@@ -141,38 +200,55 @@ button:hover {
   background: #ef4444;
 }
 
-/* Painéis */
+/* Aguardando */
+.badge.aguardando {
+  background: #e2e8f0;
+  color: #475569;
+}
+.badge.aguardando .badge-dot {
+  background: #94a3b8;
+}
+
+/* ========== PAINÉIS ========== */
 .panel {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 14px;
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  margin-bottom: 12px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
 }
 
 .panel-title {
   font-weight: 600;
-  margin-bottom: 6px;
+  font-size: 0.9rem;
   color: #0f172a;
 }
 
 .panel-text {
   color: #475569;
   font-size: 0.9rem;
+  line-height: 1.45;
   white-space: pre-wrap;
 }
 
 .panel-empty {
   color: #94a3b8;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-style: italic;
 }
 
-/* Rodapé */
+/* ========== RODAPÉ ========== */
 .footer {
   grid-column: 1 / -1;
   margin-top: 12px;
-  color: #64748b;
-  font-size: 0.78rem;
+  color: #94a3b8;
+  font-size: 0.8rem;
   text-align: center;
 }

@@ -1,51 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Classificador de E-mails v3</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #f4f4f4;
-            padding: 40px;
-        }
-        .box {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            width: 500px;
-            margin: auto;
-            box-shadow: 0 0 10px #0003;
-        }
-        textarea {
-            width: 100%;
-            height: 130px;
-            padding: 10px;
-        }
-        button {
-            padding: 10px 14px;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Classificador Inteligente de E-mails</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS externo profissional -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body>
+  <div class="wrapper">
+    <div class="card">
 
-<div class="box">
-    <h2>Classificador de E-mails</h2>
+      <!-- Cabeçalho -->
+      <header class="header">
+        <div class="title">Classificador Inteligente de E-mails</div>
+        <p class="subtitle">
+          IA para triagem automática de e-mails e geração de respostas, focada em operações financeiras.
+        </p>
+      </header>
 
-    <form method="POST">
-        <textarea name="email_text" placeholder="Cole aqui o e-mail..."></textarea>
-        <br>
-        <button type="submit">Classificar</button>
-    </form>
+      <!-- COLUNA ESQUERDA: formulário -->
+      <section class="left-side">
+        <h2 class="section-title">1. Cole o e-mail recebido</h2>
+        <p class="section-help">
+          A IA vai analisar o conteúdo e classificar como <strong>Produtivo</strong> ou <strong>Improdutivo</strong>,
+          além de sugerir uma resposta automática.
+        </p>
 
-    {% if result %}
-        <h3>{{ result }}</h3>
-        <p><strong>Resposta automática:</strong></p>
-        <p>{{ auto_reply }}</p>
-    {% endif %}
+        <form method="POST" class="form">
+          <label class="field-label" for="email_text">Texto do e-mail</label>
+          <textarea
+            id="email_text"
+            name="email_text"
+            placeholder="Ex: Olá, preciso de uma atualização sobre o status do meu contrato..."
+          >{% if original_text %}{{ original_text }}{% endif %}</textarea>
 
-</div>
+          <button type="submit" class="primary-button">⚡ Classificar agora</button>
+        </form>
 
+        <div class="helper-box">
+          <span class="helper-title">Dica rápida</span>
+          <p class="helper-text">
+            Use textos reais que você recebe no dia a dia: cobrança, suporte, dúvidas, felicitações etc.
+          </p>
+        </div>
+      </section>
+
+      <!-- COLUNA DIREITA: resultado -->
+      <section class="right-side">
+        <h2 class="section-title">2. Resultado da classificação</h2>
+
+        {% if label %}
+          <div class="badge {{ label }}">
+            <span class="badge-dot"></span>
+            <span class="badge-text">
+              {% if label == "produtivo" %}
+                Produtivo — requer ação da equipe
+              {% else %}
+                Improdutivo — sem necessidade de ação imediata
+              {% endif %}
+            </span>
+          </div>
+        {% else %}
+          <div class="badge aguardando">
+            <span class="badge-dot"></span>
+            <span class="badge-text">Nenhum e-mail analisado ainda</span>
+          </div>
+        {% endif %}
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Resumo da IA</span>
+          </div>
+          {% if result %}
+            <p class="panel-text">{{ result }}</p>
+          {% else %}
+            <p class="panel-empty">
+              O resumo da classificação aparece aqui depois que você enviar um e-mail para análise.
+            </p>
+          {% endif %}
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Resposta sugerida</span>
+          </div>
+          {% if auto_reply %}
+            <p class="panel-text">{{ auto_reply }}</p>
+          {% else %}
+            <p class="panel-empty">
+              A resposta automática gerada pela IA será exibida aqui após a classificação.
+            </p>
+          {% endif %}
+        </div>
+      </section>
+
+      <!-- Rodapé -->
+      <footer class="footer">
+        Solução demonstrativa de classificação de e-mails com IA • Ambiente de teste
+      </footer>
+
+    </div>
+  </div>
 </body>
 </html>
